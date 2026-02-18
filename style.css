@@ -1,18 +1,21 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Montserrat',sans-serif;
-  background:#1a1d22;
-  color:#fff;
+  background:linear-gradient(160deg,#f3f4f6 0%, #e5e7eb 50%, #d1d5db 100%);
+  color:#1a1d22;
   overflow:hidden;
 }
+
 
 .watermark{
   position:fixed;
   inset:0;
-  background:url('logo-meraki.png') center/800px no-repeat;
-  opacity:0.05;
+  background:url('logo-meraki.png') center/700px no-repeat;
+  opacity:0.15;
+  filter:blur(1px);
   z-index:-1;
 }
+
 
 .navbar{
   position:fixed;
@@ -27,7 +30,7 @@ body{
 }
 
 .navbar img{
-  height:60px;
+  height:100px;
   cursor:pointer;
 }
 

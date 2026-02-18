@@ -1,46 +1,53 @@
+// =========================
 // SPLASH SCREEN
+// =========================
 const splash = document.getElementById("splash");
-
-splash.addEventListener("click", () => {
-  splash.style.opacity = "0";
-  setTimeout(() => {
-    splash.style.display = "none";
-    auto = true; // ativa o automático só depois da splash
-  }, 600);
-});
-// MOSTRAR BOTÃO DO WHATSAPP APÓS A SPLASH
 const whatsButton = document.getElementById("whatsButton");
 
 splash.addEventListener("click", () => {
   splash.style.opacity = "0";
+
   setTimeout(() => {
     splash.style.display = "none";
     auto = true;
 
-    // Exibe o botão
+    // Exibe o botão do WhatsApp
     whatsButton.style.opacity = "1";
     whatsButton.style.pointerEvents = "auto";
 
   }, 600);
 });
 
-// --- SLIDES ---
+// =========================
+// SLIDES
+// =========================
 const slides = document.querySelectorAll(".slide");
 let index = 0;
-let auto = true;
+let auto = false; // só ativa após splash
 
-// --- CRIAÇÃO DOS INDICADORES ---
+function showSlide(i){
+  slides.forEach(s => s.classList.remove("active"));
+  slides[i].classList.add("active");
+  updateIndicators();
+}
+
+showSlide(index);
+
+// =========================
+// INDICADORES (BOLINHAS)
+// =========================
 const indicatorsContainer = document.getElementById("indicators");
 
 slides.forEach((_, i) => {
   const dot = document.createElement("div");
   dot.classList.add("indicator");
+
   dot.addEventListener("click", () => {
     auto = false;
     index = i;
     showSlide(index);
-    updateIndicators();
   });
+
   indicatorsContainer.appendChild(dot);
 });
 
@@ -51,16 +58,9 @@ function updateIndicators(){
   });
 }
 
-// --- MOSTRAR SLIDE ---
-function showSlide(i){
-  slides.forEach(s => s.classList.remove("active"));
-  slides[i].classList.add("active");
-  updateIndicators();
-}
-
-showSlide(index);
-
-// --- AUTOMÁTICO ---
+// =========================
+// AUTOMÁTICO
+// =========================
 function nextSlide(){
   if(!auto) return;
   index = (index + 1) % slides.length;
@@ -69,7 +69,9 @@ function nextSlide(){
 
 setInterval(nextSlide, 6000);
 
-// --- SCROLL ---
+// =========================
+// SCROLL
+// =========================
 let scrollTimeout;
 
 window.addEventListener("wheel", (event) => {
@@ -86,13 +88,20 @@ window.addEventListener("wheel", (event) => {
   }, 80);
 });
 
-// --- SPLASH SCREEN ---
-const splash = document.getElementById("splash");
-
-splash.addEventListener("click", () => {
-  splash.style.opacity = "0";
-  setTimeout(() => {
-    splash.style.display = "none";
-    auto = true;
-  }, 600);
+// =========================
+// LOGO NAVBAR → VOLTAR AO SLIDE 0
+// =========================
+document.getElementById("logoNav").addEventListener("click", () => {
+  auto = false;
+  index = 0;
+  showSlide(0);
 });
+
+// =========================
+// Hiperlink direto para slide
+// =========================
+function goToSlide(n){
+  auto = false;
+  index = n;
+  showSlide(index);
+}

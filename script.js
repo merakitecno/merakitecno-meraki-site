@@ -1,18 +1,3 @@
-// TELA DE ABERTURA
-const opening = document.getElementById("opening");
-const logoOpening = document.querySelector(".opening-logo");
-
-function startPresentation(){
-  opening.classList.add("hide");
-  setTimeout(() => {
-    auto = true;
-    showSlide(0);
-  }, 600);
-}
-
-logoOpening.addEventListener("click", startPresentation);
-
-
 const slides = document.querySelectorAll(".slide");
 let index = 0;
 let auto = true;

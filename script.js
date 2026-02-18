@@ -1,8 +1,10 @@
+// =========================
 // SPLASH
+// =========================
 const splash = document.getElementById("splash");
 const whatsButton = document.getElementById("whatsButton");
 
-let auto = false;
+let auto = false; // só ativa depois da splash
 
 splash.addEventListener("click", () => {
   splash.style.opacity = "0";
@@ -11,15 +13,26 @@ splash.addEventListener("click", () => {
     splash.style.display = "none";
     auto = true;
 
+    // Exibe o botão do WhatsApp
     whatsButton.style.opacity = "1";
     whatsButton.style.pointerEvents = "auto";
     whatsButton.style.zIndex = "9000";
   }, 600);
 });
 
+// =========================
 // SLIDES
+// =========================
 const slides = document.querySelectorAll(".slide");
 let index = 0;
+
+// aplica as imagens de fundo com base no data-bg
+slides.forEach(slide => {
+  const bg = slide.getAttribute("data-bg");
+  if (bg) {
+    slide.style.backgroundImage = `url('${bg}')`;
+  }
+});
 
 function showSlide(i){
   slides.forEach(s => s.classList.remove("active"));
@@ -29,7 +42,9 @@ function showSlide(i){
 
 showSlide(index);
 
+// =========================
 // INDICADORES
+// =========================
 const indicatorsContainer = document.getElementById("indicators");
 
 slides.forEach((_, i) => {
@@ -52,7 +67,9 @@ function updateIndicators(){
   });
 }
 
-// AUTOMÁTICO
+// =========================
+/* AUTOMÁTICO */
+// =========================
 function nextSlide(){
   if(!auto) return;
   index = (index + 1) % slides.length;
@@ -61,7 +78,9 @@ function nextSlide(){
 
 setInterval(nextSlide, 6000);
 
+// =========================
 // SCROLL
+// =========================
 let scrollTimeout;
 
 window.addEventListener("wheel", (event) => {
@@ -78,14 +97,18 @@ window.addEventListener("wheel", (event) => {
   }, 80);
 });
 
+// =========================
 // LOGO NAVBAR → VOLTAR AO SLIDE 0
+// =========================
 document.getElementById("logoNav").addEventListener("click", () => {
   auto = false;
   index = 0;
   showSlide(0);
 });
 
-// Hiperlink direto para slide
+// =========================
+// Hiperlink direto para slide (se quiser usar no HTML)
+// =========================
 function goToSlide(n){
   auto = false;
   index = n;

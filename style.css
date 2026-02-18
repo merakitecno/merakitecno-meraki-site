@@ -1,18 +1,22 @@
-/* RESET */
+/* =========================
+   RESET
+========================= */
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Inter', sans-serif;
 }
 
 body{
   overflow:hidden;
   background:#FFFFFF;
   color:#374151;
+  font-family:'Inter', sans-serif;
 }
 
-/* SPLASH */
+/* =========================
+   SPLASH
+========================= */
 #splash{
   position:fixed;
   inset:0;
@@ -27,17 +31,17 @@ body{
 }
 
 .splash-logo{
-  width:420px;
-  max-width:80vw;
+  width:360px;
+  max-width:75vw;
   opacity:0;
   animation:fadeIn 1.5s forwards;
-  filter:drop-shadow(0 8px 18px rgba(0,0,0,0.25));
-  transform:perspective(600px) rotateX(8deg);
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,0.18));
+  transform:perspective(700px) rotateX(6deg);
 }
 
 .splash-text{
-  margin-top:30px;
-  font-size:26px;
+  margin-top:28px;
+  font-size:22px;
   color:#1A73E8;
   opacity:0;
   animation:fadeIn 2.5s forwards;
@@ -47,25 +51,44 @@ body{
   to{opacity:1;}
 }
 
-/* LOGO 3D NA NAVBAR */
-.logo-3d{
-  height:55px;
-  transition:transform .4s ease, filter .4s ease;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+/* =========================
+   NAVBAR
+========================= */
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:72px;
+  display:flex;
+  align-items:center;
+  padding:0 28px;
+  z-index:100;
+  background:#FFFFFFE6;
+  backdrop-filter:blur(10px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
 }
 
-.logo-3d:hover{
-  transform:perspective(600px) rotateX(10deg) scale(1.05);
-  filter:drop-shadow(0 10px 20px rgba(0,0,0,0.35));
+#logoNav{
+  height:48px;
+  transition:transform .35s ease, filter .35s ease;
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,0.18));
 }
 
-/* WHATSAPP BUTTON */
+#logoNav:hover{
+  transform:perspective(600px) rotateX(8deg) scale(1.04);
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,0.28));
+}
+
+/* =========================
+   WHATSAPP BUTTON
+========================= */
 #whatsButton{
   position:fixed;
-  bottom:30px;
-  right:30px;
-  width:70px;
-  height:70px;
+  bottom:28px;
+  right:28px;
+  width:64px;
+  height:64px;
   background:#25D366;
   border-radius:50%;
   display:flex;
@@ -80,31 +103,17 @@ body{
 }
 
 #whatsButton:hover{
-  transform:scale(1.1);
+  transform:scale(1.12);
 }
 
 #whatsButton img{
-  width:38px;
-  height:38px;
+  width:34px;
+  height:34px;
 }
 
-/* NAVBAR */
-.navbar{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:80px;
-  display:flex;
-  align-items:center;
-  padding:0 20px;
-  z-index:100;
-  background:#FFFFFFCC;
-  backdrop-filter:blur(8px);
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
-}
-
-/* SLIDES */
+/* =========================
+   SLIDES
+========================= */
 #slides-container{
   position:relative;
   width:100%;
@@ -127,10 +136,35 @@ body{
   opacity:1;
 }
 
-/* INDICADORES */
+/* =========================
+   TIPOGRAFIA INDUSTRIAL
+========================= */
+h1{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:52px;
+  margin-bottom:22px;
+  color:#0F1B2B;
+  font-weight:700;
+  letter-spacing:-0.5px;
+}
+
+p, li{
+  font-size:22px;
+  line-height:1.55;
+  color:#374151;
+  font-weight:400;
+}
+
+ul{
+  margin-left:22px;
+}
+
+/* =========================
+   INDICADORES
+========================= */
 #indicators{
   position:fixed;
-  bottom:40px;
+  bottom:42px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
@@ -142,42 +176,32 @@ body{
   width:14px;
   height:14px;
   border-radius:50%;
-  background:#bfc5d1;
+  background:#C5CBD3;
   cursor:pointer;
-  transition:0.3s;
+  transition:0.25s ease;
+}
+
+.indicator:hover{
+  transform:scale(1.25);
+  background:#1A73E8AA;
 }
 
 .indicator.active{
   background:#1A73E8;
-  transform:scale(1.3);
+  transform:scale(1.35);
 }
 
-/* TIPOGRAFIA */
-h1{
-  font-size:48px;
-  margin-bottom:20px;
-  color:#0F1B2B;
-  font-weight:800;
-}
-
-p, li{
-  font-size:22px;
-  line-height:1.5;
-  color:#374151;
-}
-
-ul{
-  margin-left:20px;
-}
-
-/* RESPONSIVO */
+/* =========================
+   RESPONSIVO
+========================= */
 @media(max-width:768px){
+
   .splash-logo{
-    width:280px;
+    width:260px;
   }
 
   h1{
-    font-size:32px;
+    font-size:34px;
   }
 
   p, li{
@@ -185,16 +209,16 @@ ul{
   }
 
   .slide{
-    padding:100px 30px;
+    padding:100px 28px;
   }
 
   #whatsButton{
-    width:60px;
-    height:60px;
+    width:56px;
+    height:56px;
   }
 
   #whatsButton img{
-    width:32px;
-    height:32px;
+    width:30px;
+    height:30px;
   }
 }

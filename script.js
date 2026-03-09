@@ -1,136 +1,140 @@
-// =========================
-// SPLASH
-// =========================
-const splash = document.getElementById("splash");
-const whatsButton = document.getElementById("whatsButton");
+document.addEventListener("DOMContentLoaded", () => {
 
-let auto = false;
+  // =========================
+  // SPLASH
+  // =========================
+  const splash = document.getElementById("splash");
+  const whatsButton = document.getElementById("whatsButton");
 
-splash.addEventListener("click", () => {
-  splash.style.opacity = "0";
+  let auto = false;
 
-  setTimeout(() => {
-    splash.style.display = "none";
-    auto = true;
+  splash.addEventListener("click", () => {
+    splash.style.opacity = "0";
 
-    whatsButton.style.opacity = "1";
-    whatsButton.style.pointerEvents = "auto";
-    whatsButton.style.zIndex = "9000";
-  }, 600);
-});
+    setTimeout(() => {
+      splash.style.display = "none";
+      auto = true;
+
+      whatsButton.style.opacity = "1";
+      whatsButton.style.pointerEvents = "auto";
+      whatsButton.style.zIndex = "9000";
+    }, 600);
+  });
 
 
-// =========================
-// SLIDES
-// =========================
-const slides = document.querySelectorAll(".slide");
-let index = 0;
+  // =========================
+  // SLIDES
+  // =========================
+  const slides = document.querySelectorAll(".slide");
+  let index = 0;
 
-slides.forEach(slide => {
-  let bg = slide.getAttribute("data-bg");
+  slides.forEach(slide => {
+    let bg = slide.getAttribute("data-bg");
 
-  if (bg) {
-    if (!bg.includes("?")) {
-      bg += "?auto=format&fit=crop&w=1920&q=80";
+    if (bg) {
+      if (!bg.includes("?")) {
+        bg += "?auto=format&fit=crop&w=1920&q=80";
+      }
+      slide.style.backgroundImage = `url('${bg}')`;
     }
-    slide.style.backgroundImage = `url('${bg}')`;
-  }
-});
-
-function showSlide(i){
-  slides.forEach(s => s.classList.remove("active"));
-  slides[i].classList.add("active");
-  updateIndicators();
-}
-
-showSlide(index);
-
-
-// =========================
-// INDICADORES MERAKI
-// =========================
-const indicatorsContainer = document.getElementById("indicators");
-const letters = ["M", "E", "R", "A", "K", "I"];
-const indicators = [];
-
-slides.forEach((_, i) => {
-  const dot = document.createElement("div");
-
-  if (i < letters.length) {
-    dot.classList.add("indicator");
-    dot.textContent = letters[i];
-  } else {
-    dot.classList.add("indicator-default");
-  }
-
-  indicators.push(dot);
-
-  dot.addEventListener("click", () => {
-    auto = false;
-    index = i;
-    showSlide(index);
   });
 
-  indicatorsContainer.appendChild(dot);
-});
+  function showSlide(i){
+    slides.forEach(s => s.classList.remove("active"));
+    slides[i].classList.add("active");
+    updateIndicators();
+  }
 
-function updateIndicators(){
-  indicators.forEach((dot, i) => {
-    dot.classList.remove("active");
-    if (i === index) dot.classList.add("active");
-  });
-}
-
-updateIndicators();
-
-
-// =========================
-// AUTOPLAY
-// =========================
-function nextSlide(){
-  if(!auto) return;
-  index = (index + 1) % slides.length;
   showSlide(index);
-}
-
-setInterval(nextSlide, 6000);
 
 
-// =========================
-// SCROLL
-// =========================
-let scrollTimeout;
+  // =========================
+  // INDICADORES MERAKI
+  // =========================
+  const indicatorsContainer = document.getElementById("indicators");
+  const letters = ["M", "E", "R", "A", "K", "I"];
+  const indicators = [];
 
-window.addEventListener("wheel", (event) => {
-  auto = false;
-  clearTimeout(scrollTimeout);
+  slides.forEach((_, i) => {
+    const dot = document.createElement("div");
 
-  scrollTimeout = setTimeout(() => {
-    if (event.deltaY > 0) {
-      index = (index + 1) % slides.length;
+    if (i < letters.length) {
+      dot.classList.add("indicator");
+      dot.textContent = letters[i];
     } else {
-      index = (index - 1 + slides.length) % slides.length;
+      dot.classList.add("indicator-default");
     }
+
+    indicators.push(dot);
+
+    dot.addEventListener("click", () => {
+      auto = false;
+      index = i;
+      showSlide(index);
+    });
+
+    indicatorsContainer.appendChild(dot);
+  });
+
+  function updateIndicators(){
+    indicators.forEach((dot, i) => {
+      dot.classList.remove("active");
+      if (i === index) dot.classList.add("active");
+    });
+  }
+
+  updateIndicators();
+
+
+  // =========================
+  // AUTOPLAY
+  // =========================
+  function nextSlide(){
+    if(!auto) return;
+    index = (index + 1) % slides.length;
     showSlide(index);
-  }, 80);
+  }
+
+  setInterval(nextSlide, 6000);
+
+
+  // =========================
+  // SCROLL
+  // =========================
+  let scrollTimeout;
+
+  window.addEventListener("wheel", (event) => {
+    auto = false;
+    clearTimeout(scrollTimeout);
+
+    scrollTimeout = setTimeout(() => {
+      if (event.deltaY > 0) {
+        index = (index + 1) % slides.length;
+      } else {
+        index = (index - 1 + slides.length) % slides.length;
+      }
+      showSlide(index);
+    }, 80);
+  });
+
+
+  // =========================
+  // LOGO NAVBAR
+  // =========================
+  document.getElementById("logoNav").addEventListener("click", () => {
+    auto = false;
+    index = 0;
+    showSlide(0);
+  });
+
+
+  // =========================
+  // LINK DIRETO
+  // =========================
+  window.goToSlide = function(n){
+    auto = false;
+    index = n;
+    showSlide(index);
+  };
+
 });
-
-
-// =========================
-// LOGO NAVBAR
-// =========================
-document.getElementById("logoNav").addEventListener("click", () => {
-  auto = false;
-  index = 0;
-  showSlide(0);
-});
-
-
-// =========================
-// LINK DIRETO
-// =========================
-function goToSlide(n){
-  auto = false;
-  index = n;
-  showSlide(index);
-}

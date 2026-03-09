@@ -46,13 +46,17 @@ function showSlide(i){
 showSlide(index);
 
 // =========================
-// INDICADORES
+// INDICADORES COM LETRAS
 // =========================
 const indicatorsContainer = document.getElementById("indicators");
+
+// Letras do nome da empresa
+const letters = ["M", "E", "R", "A", "K", "I"];
 
 slides.forEach((_, i) => {
   const dot = document.createElement("div");
   dot.classList.add("indicator");
+  dot.textContent = letters[i] || ""; // caso tenha mais slides que letras
 
   dot.addEventListener("click", () => {
     auto = false;
@@ -69,6 +73,7 @@ function updateIndicators(){
     d.classList.toggle("active", i === index);
   });
 }
+
 
 // =========================
 // AUTOMÁTICO

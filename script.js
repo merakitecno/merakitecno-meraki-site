@@ -78,6 +78,9 @@ slides.forEach((_, i) => {
   indicatorsContainer.appendChild(dot);
 });
 
+updateIndicators();
+
+
 // Atualiza o estado visual dos marcadores
 function updateIndicators(){
   indicators.forEach((dot, i) => {

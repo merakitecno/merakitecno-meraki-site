@@ -19,6 +19,7 @@ splash.addEventListener("click", () => {
   }, 600);
 });
 
+
 // =========================
 // SLIDES
 // =========================
@@ -44,6 +45,7 @@ function showSlide(i){
 }
 
 showSlide(index);
+
 
 // =========================
 // INDICADORES COM LETRAS + PADRÃO MERAKI
@@ -78,9 +80,6 @@ slides.forEach((_, i) => {
   indicatorsContainer.appendChild(dot);
 });
 
-updateIndicators();
-
-
 // Atualiza o estado visual dos marcadores
 function updateIndicators(){
   indicators.forEach((dot, i) => {
@@ -92,8 +91,7 @@ function updateIndicators(){
   });
 }
 
-
-
+updateIndicators();
 
 
 // =========================
@@ -106,6 +104,7 @@ function nextSlide(){
 }
 
 setInterval(nextSlide, 6000);
+
 
 // =========================
 // SCROLL
@@ -126,6 +125,7 @@ window.addEventListener("wheel", (event) => {
   }, 80);
 });
 
+
 // =========================
 // LOGO NAVBAR → VOLTAR AO SLIDE 0
 // =========================
@@ -134,6 +134,7 @@ document.getElementById("logoNav").addEventListener("click", () => {
   index = 0;
   showSlide(0);
 });
+
 
 // =========================
 // Hiperlink direto para slide

@@ -39,14 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  function showSlide(i){
-    slides.forEach(s => s.classList.remove("active"));
-    slides[i].classList.add("active");
-    updateIndicators();
-  }
-
-  showSlide(index);
-
 
   // =========================
   // INDICADORES MERAKI
@@ -76,21 +68,33 @@ document.addEventListener("DOMContentLoaded", () => {
     indicatorsContainer.appendChild(dot);
   });
 
-  function updateIndicators(){
+
+  function updateIndicators() {
     indicators.forEach((dot, i) => {
       dot.classList.remove("active");
       if (i === index) dot.classList.add("active");
     });
   }
 
-  updateIndicators();
+
+  // =========================
+  // FUNÇÃO PRINCIPAL DE SLIDE
+  // =========================
+  function showSlide(i) {
+    slides.forEach(s => s.classList.remove("active"));
+    slides[i].classList.add("active");
+    updateIndicators();
+  }
+
+  // Agora sim: chamamos depois que indicators existe
+  showSlide(index);
 
 
   // =========================
   // AUTOPLAY
   // =========================
-  function nextSlide(){
-    if(!auto) return;
+  function nextSlide() {
+    if (!auto) return;
     index = (index + 1) % slides.length;
     showSlide(index);
   }
@@ -131,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // LINK DIRETO
   // =========================
-  window.goToSlide = function(n){
+  window.goToSlide = function(n) {
     auto = false;
     index = n;
     showSlide(index);
